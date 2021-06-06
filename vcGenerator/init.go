@@ -1,0 +1,5 @@
+package vcGenerator
+
+func init() {
+
+}
