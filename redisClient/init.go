@@ -37,15 +37,24 @@ func init() {
 	}
 	SessionRedisClient = src
 
-	_, _ = BusinessRedisClient.FlushAll(context.Background()).Result()
+	_, err = BusinessRedisClient.FlushAll(context.Background()).Result()
+	if err != nil {
+		log.Fatal(err)
+	}
 	// init
-	_, _ = BusinessRedisClient.Set(context.Background(),
+	_, err = BusinessRedisClient.Set(context.Background(),
 		"9f2d6615-59be-4af0-96d9-b15f841d6ca3",
 		"076ba636-b761-46ed-9b9e-8bfdfa07ff95",
 		0).Result()
-	_, _ = VCRedisClient.Set(context.Background(),
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = VCRedisClient.Set(context.Background(),
 		"1b7129a1-a1c5-4d69-81e4-76f3c48b24bf",
 		"123456"+"_"+`<img class="lnXdpd" alt="Google" height="92" src="/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" srcset="/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png 1x, /images/branding/googlelogo/2x/googlelogo_color_272x92dp.png 2x" width="272" data-atf="1">`, 0).Result()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func createClient(i int) (*redis.Client, error) {

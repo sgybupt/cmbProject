@@ -71,7 +71,6 @@ func requestDataNilCheck(r interface{}) error {
 
 func ServerStart() {
 	app := gin.New()
-	gin.SetMode(gin.ReleaseMode)
 	app.POST("/validation/getQuestion", GetQuestion)
 	app.POST("/validation/checkAnswer", CheckAnswer)
 	err := app.Run(fmt.Sprintf("0.0.0.0:%d", 8180))
