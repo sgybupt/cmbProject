@@ -4,6 +4,7 @@
     <list default="true" id="fbd6a8ee-d0d1-4eda-af6d-d97f0b903cb1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redisClient/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/redisClient/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redisClient/session.go" beforeDir="false" afterPath="$PROJECT_DIR$/redisClient/session.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,17 +78,18 @@
     <MESSAGE value="primary" />
     <MESSAGE value="NBL" />
     <MESSAGE value="NLB" />
-    <option name="LAST_COMMIT_MESSAGE" value="NLB" />
+    <MESSAGE value="pool size" />
+    <option name="LAST_COMMIT_MESSAGE" value="pool size" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
     <proxy>direct</proxy>
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="123" key="CommitChangelistDialog2" timestamp="1622986812250">
+    <state x="421" y="123" key="CommitChangelistDialog2" timestamp="1622991104578">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="421" y="123" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1622986812250" />
+    <state x="421" y="123" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1622991104578" />
     <state width="1636" height="274" key="GridCell.Tab.0.bottom" timestamp="1622983627212">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>

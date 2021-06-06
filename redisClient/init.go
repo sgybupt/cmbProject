@@ -31,11 +31,11 @@ func init() {
 	}
 	VCAnswerRedisClient = vcarc
 
-	src, err := createClient(3)
-	if err != nil {
-		log.Fatal(err)
-	}
-	SessionRedisClient = src
+	//src, err := createClient(3)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//SessionRedisClient = src
 
 	_, err = BusinessRedisClient.FlushAll(context.Background()).Result()
 	if err != nil {
@@ -59,11 +59,10 @@ func init() {
 
 func createClient(i int) (*redis.Client, error) {
 	client := redis.NewClient(&redis.Options{
-		Addr:         "sc-cluster.zepyep.ng.0001.cnw1.cache.amazonaws.com.cn:6379",
-		Password:     "",
-		DB:           i,
-		PoolSize:     5,
-		MinIdleConns: 2,
+		Addr:     "sc-cluster.zepyep.ng.0001.cnw1.cache.amazonaws.com.cn:6379",
+		Password: "",
+		DB:       i,
+		PoolSize: 20,
 	})
 
 	// 通过 cient.Ping() 来检查是否成功连接到了 redis 服务器
