@@ -107,9 +107,9 @@ func main() {
 					TimeStamp: &timeStamp,
 				}
 
-				a1 := postJson1("http://127.0.0.1:8180/validation/getQuestion", a)
+				a1 := postJson1("http://test-8180nlb-c580d437de8d633c.elb.cn-northwest-1.amazonaws.com.cn:8180/validation/getQuestion", a)
 				answer := "123456"
-				postJson2("http://127.0.0.1:8180/validation/checkAnswer", CheckAnswerReq{
+				postJson2("http://test-8180nlb-c580d437de8d633c.elb.cn-northwest-1.amazonaws.com.cn:8180/validation/checkAnswer", CheckAnswerReq{
 					ReqStr:     &a1.ReqStr,
 					TimeStamp:  a.TimeStamp,
 					QuestionId: &a1.QuestionId,
