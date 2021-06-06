@@ -3,6 +3,7 @@ package webServer
 import (
 	"cmbProject/redisClient"
 	"cmbProject/vcGenerator"
+	"errors"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/iris-contrib/go.uuid"
 	"github.com/kataras/iris/v12"
@@ -34,6 +35,13 @@ func GetQuestion(ctx *gin.Context) {
 	err = requestDataNilCheck(req)
 	if ErrorHandler(err, false, ctx, iris.StatusBadRequest) {
 		return
+	}
+
+	if time.Since(time.Unix(0, *req.TimeStamp)) > time.Second*60 {
+		err = errors.New("expiration")
+		if ErrorHandler(err, false, ctx, iris.StatusBadRequest) {
+			return
+		}
 	}
 
 	_, answer, content, err := vcGenerator.GetQuestion()
@@ -87,6 +95,13 @@ func CheckAnswer(ctx *gin.Context) {
 		return
 	}
 
+	if time.Since(time.Unix(0, *req.TimeStamp)) > time.Second*60 {
+		err = errors.New("expiration")
+		if ErrorHandler(err, false, ctx, iris.StatusBadRequest) {
+			return
+		}
+	}
+
 	// pre check
 	pass, err := redisClient.CheckVCAnswer(*req.QuestionId, *req.Answer)
 	if ErrorHandler(err, false, ctx, iris.StatusBadRequest) {
@@ -94,8 +109,10 @@ func CheckAnswer(ctx *gin.Context) {
 	}
 	var rsp CheckAnswerRsp
 	if !pass {
-		rsp.Result = 0
-		rsp.ReqStr = *req.ReqStr
+		err = errors.New("check failed")
+		if ErrorHandler(err, false, ctx, iris.StatusBadRequest) {
+			return
+		}
 		ctx.JSON(200, rsp)
 	}
 	rsp.Result = 1
