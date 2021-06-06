@@ -4,6 +4,7 @@ import (
 	"cmbProject/redisClient"
 	"cmbProject/vcGenerator"
 	"github.com/gin-gonic/gin"
+	uuid "github.com/iris-contrib/go.uuid"
 	"github.com/kataras/iris/v12"
 	"time"
 )
@@ -35,10 +36,13 @@ func GetQuestion(ctx *gin.Context) {
 		return
 	}
 
-	qId, answer, content, err := vcGenerator.GetQuestion()
+	_, answer, content, err := vcGenerator.GetQuestion()
 	if ErrorHandler(err, false, ctx, iris.StatusBadRequest) {
 		return
 	}
+
+	uu, _ := uuid.NewV4()
+	qId := uu.String()
 
 	var rsp GetQuestionRsp
 	rsp.ReqStr = *req.ReqStr
