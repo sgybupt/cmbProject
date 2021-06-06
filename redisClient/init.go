@@ -50,7 +50,7 @@ func init() {
 
 func createClient(i int) (*redis.Client, error) {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+		Addr:     "sc-cluster-ro.zepyep.ng.0001.cnw1.cache.amazonaws.com.cn:6379",
 		Password: "",
 		DB:       i,
 	})
