@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -88,6 +89,8 @@ func postJson2(u string, a CheckAnswerReq) {
 }
 
 func main() {
+	var Q1 int64
+	var Q2 int64
 	start := time.Now()
 	wg := sync.WaitGroup{}
 	for i := 0; i < 2000; i++ {
@@ -106,9 +109,11 @@ func main() {
 					Mode:      &mode,
 					TimeStamp: &timeStamp,
 				}
-
+				s1 := time.Now().UnixNano()
 				a1 := postJson1("http://test-8180nlb-c580d437de8d633c.elb.cn-northwest-1.amazonaws.com.cn:8180/validation/getQuestion", a)
+				atomic.AddInt64(&Q1, time.Now().UnixNano()-s1)
 				answer := "123456"
+				s2 := time.Now().UnixNano()
 				postJson2("http://test-8180nlb-c580d437de8d633c.elb.cn-northwest-1.amazonaws.com.cn:8180/validation/checkAnswer", CheckAnswerReq{
 					ReqStr:     &a1.ReqStr,
 					TimeStamp:  a.TimeStamp,
@@ -116,6 +121,7 @@ func main() {
 					Answer:     &answer,
 					SecretId:   &answer,
 				})
+				atomic.AddInt64(&Q2, time.Now().UnixNano()-s2)
 				wg.Done()
 			}()
 		}
@@ -123,4 +129,5 @@ func main() {
 	}
 	wg.Wait()
 	fmt.Println(time.Since(start))
+	fmt.Println(Q1/10000, Q2/10000)
 }
