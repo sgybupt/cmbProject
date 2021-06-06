@@ -59,10 +59,11 @@ func init() {
 
 func createClient(i int) (*redis.Client, error) {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "sc-cluster.zepyep.ng.0001.cnw1.cache.amazonaws.com.cn:6379",
-		Password: "",
-		DB:       i,
-		PoolSize: 20,
+		Addr:         "sc-cluster.zepyep.ng.0001.cnw1.cache.amazonaws.com.cn:6379",
+		Password:     "",
+		DB:           i,
+		PoolSize:     5,
+		MinIdleConns: 2,
 	})
 
 	// 通过 cient.Ping() 来检查是否成功连接到了 redis 服务器
